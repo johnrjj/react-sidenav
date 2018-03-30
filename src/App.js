@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      stack: [this.generateNewSideNavPage()],
+      stack: [this.generateNewSideNavPage({ hideBack: true })],
     };
   }
 
@@ -36,10 +36,10 @@ class App extends Component {
 
   // util fn
   sideNavCount = 0;
-  generateNewSideNavPage = () => (
+  generateNewSideNavPage = ({ hideBack } = {hideBack: false }) => (
     <SideNavPage style={{ background: gradients[this.sideNavCount % 4] }} key={++this.sideNavCount}>
-      <ArrowLeft onClick={() => this.navigateBackward()} />
-      <ArrowRight onClick={() => this.navigateForward()} />
+      { !hideBack && <ArrowLeft onClick={() => this.navigateBackward()} /> }
+   <ArrowRight onClick={() => this.navigateForward()} /> 
     </SideNavPage>
   );
 }
