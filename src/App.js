@@ -14,15 +14,9 @@ class App extends Component {
   }
 
   navigateForward = () =>
-    this.setState(state => {
-      return { stack: [this.generateNewSideNavPage(), ...state.stack] };
-    });
+    this.setState(state => ({ stack: [...state.stack, this.generateNewSideNavPage()] }));
 
-  navigateBackward = () =>
-    this.setState(state => {
-      const [, ...xs] = this.state.stack;
-      return { stack: [...xs] };
-    });
+  navigateBackward = () => this.setState(state => ({ stack: this.state.stack.slice(1, -1) }));
 
   render() {
     return (
@@ -36,10 +30,10 @@ class App extends Component {
 
   // util fn
   sideNavCount = 0;
-  generateNewSideNavPage = ({ hideBack } = {hideBack: false }) => (
+  generateNewSideNavPage = ({ hideBack } = { hideBack: false }) => (
     <SideNavPage style={{ background: gradients[this.sideNavCount % 4] }} key={++this.sideNavCount}>
-      { !hideBack && <ArrowLeft onClick={() => this.navigateBackward()} /> }
-   <ArrowRight onClick={() => this.navigateForward()} /> 
+      {!hideBack && <ArrowLeft onClick={() => this.navigateBackward()} />}
+      <ArrowRight onClick={() => this.navigateForward()} />
     </SideNavPage>
   );
 }

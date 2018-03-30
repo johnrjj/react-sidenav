@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import posed, { PoseGroup } from 'react-pose';
 
@@ -68,7 +68,7 @@ const SlideableMenuContainer = styled.div`
 
 const SideMenu = ({ children }) => (
   <SlideableMenuContainer>
-    <PoseGroup>{React.Children.toArray(children).reverse()}</PoseGroup>
+    <PoseGroup>{children}</PoseGroup>
   </SlideableMenuContainer>
 );
 
