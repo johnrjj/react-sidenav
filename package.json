@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prettier": "prettier --single-quote --print-width 100 --trailing-comma es5 --write 'src/**/*.{js,css}'"
+    "prettier": "prettier --single-quote --print-width 80 --trailing-comma es5 --write 'src/**/*.{js,css}'"
 
   },
   "devDependencies": {
