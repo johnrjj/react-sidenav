@@ -2,7 +2,7 @@ import React  from 'react';
 import styled from 'styled-components';
 import posed, { PoseGroup } from 'react-pose';
 
-const SideMenuShadowboxContainer = styled.aside`
+const SideMenuShadowbox = styled.aside`
   color: #fff;
   position: fixed;
   left: 0;
@@ -68,8 +68,8 @@ const SlideableMenuContainer = styled.div`
 
 const SideMenu = ({ children }) => (
   <SlideableMenuContainer>
-    <PoseGroup>{children}</PoseGroup>
+    <PoseGroup>{React.Children.toArray(children).reverse()}</PoseGroup>
   </SlideableMenuContainer>
 );
 
-export { SideMenu, SideNavPage, SlideableMenuContainer, SideMenuShadowboxContainer };
+export { SideMenu, SideNavPage, SlideableMenuContainer, SideMenuShadowbox };

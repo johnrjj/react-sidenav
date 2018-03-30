@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { ArrowLeft, ArrowRight } from 'react-feather';
-import { SideNavPage, SideMenuShadowboxContainer, SideMenu } from './components/SideNav';
+import { SideNavPage, SideMenuShadowbox, SideMenu } from './components/SideNav';
 
 const AppContainer = styled.div``;
 
@@ -27,9 +27,9 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <SideMenuShadowboxContainer visible>
-          <SideMenu>{[...this.state.stack].reverse()}</SideMenu>
-        </SideMenuShadowboxContainer>
+        <SideMenuShadowbox visible>
+          <SideMenu>{this.state.stack}</SideMenu>
+        </SideMenuShadowbox>
       </AppContainer>
     );
   }
