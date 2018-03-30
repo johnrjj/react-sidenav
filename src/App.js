@@ -19,7 +19,7 @@ class App extends Component {
     }));
 
   navigateBackward = () =>
-    this.setState(state => ({ stack: this.state.stack.slice(1, -1) }));
+    this.setState(state => ({ stack: this.state.stack.slice(0, -1) }));
 
   render() {
     return (
