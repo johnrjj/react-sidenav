@@ -34,22 +34,22 @@ const SideNavPagePose = posed.div({
 });
 
 const SideNavPage = styled(SideNavPagePose)`
-  background: linear-gradient(#ed6153, #ed6153 50%, #f9b16d);
-  line-height: 3;
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
   max-width: 300px;
   width: 100%;
-  /*   width: 90%; for box-shadow (due to display: hidden */
   height: 100%;
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); */
-  display: flex;
+  background: linear-gradient(#ed6153, #ed6153 50%, #f9b16d);
+  line-height: 3;
   contain: strict;
-  flex-direction: column;
   will-change: transform;
   z-index: 160;
   pointer-events: auto;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); */
+  /* width: 90%; for box-shadow (due to display: hidden) */
 `;
 
 const SlideableMenuContainer = styled.div`
@@ -72,4 +72,4 @@ const SideMenu = ({ children }) => (
   </SlideableMenuContainer>
 );
 
-export { SideMenu, SideNavPage, SlideableMenuContainer, SideMenuShadowbox };
+export { SideMenu, SideNavPage, SideMenuShadowbox };
