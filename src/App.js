@@ -1,30 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, ArrowRight, Menu, X } from 'react-feather';
-import { SideNavPage, SideMenuShadowbox, SideMenu } from './components/SideNav';
-import posed, {PoseGroup} from 'react-pose';
+import { ArrowLeft, ArrowRight, Menu } from 'react-feather';
+import { SideNavPage, SideNavShadowbox, SideNav } from './components/SideNav';
 
 const AppContainer = styled.div``;
 const MainContainer = styled.div``;
 
-const FadeIn = posed.li({
-  enter: { opacity: 1 },
-  exit: { opacity: 0.1 }
-})
-
-// const FadeIn = posed.div({
-//   enter: { x: '50%' },
-//   exit: { x: '120%' },
-// });
-
 class App extends Component {
   constructor() {
     super();
+    this.generateNewSideNavPage = this.generateNewSideNavPage.bind(this);
     this.state = {
       sideNavOpen: true,
-      sideNavStack: [this.generateNewSideNavPage({ hideBack: true })],
+      sideNavStack: [this.generateNewSideNavPage({ disableBack: true })],
     };
-    // setTimeout(() => this.setState({ sideNavOpen: false}), 1000)
   }
 
   navigateForward = () =>
@@ -33,18 +22,23 @@ class App extends Component {
     }));
 
   navigateBackward = () =>
-    this.setState(state => ({ sideNavStack: this.state.sideNavStack.slice(0, -1) }));
+    this.setState(state => ({
+      sideNavStack: this.state.sideNavStack.slice(0, -1),
+    }));
 
   render() {
     const { sideNavOpen, sideNavStack } = this.state;
     return (
       <AppContainer>
-        <SideMenuShadowbox onClick={() => this.closeSideNav()} visible={sideNavOpen}>
-          <SideMenu open={sideNavOpen}>
-            {sideNavStack}
-          </SideMenu>
-        </SideMenuShadowbox>
-        <MainContainer><Menu onClick={() => this.openSideNav()}/></MainContainer>
+        <SideNavShadowbox
+          onClick={() => this.closeSideNav()}
+          visible={sideNavOpen}
+        >
+          <SideNav open={sideNavOpen}>{sideNavStack}</SideNav>
+        </SideNavShadowbox>
+        <MainContainer>
+          <Menu onClick={() => this.openSideNav()} />
+        </MainContainer>
       </AppContainer>
     );
   }
@@ -63,18 +57,15 @@ class App extends Component {
 
   // util fn
   sideNavCount = 0;
-  generateNewSideNavPage = ({ hideBack, pose } = { hideBack: false }) => (
+  generateNewSideNavPage = ({ disableBack } = { disableBack: false }) => (
     <SideNavPage
       style={{ background: gradients[this.sideNavCount % 4] }}
       key={++this.sideNavCount}
     >
-      <PoseGroup animateOnMount={true}>
-      {<FadeIn>hellllloooooodgkjhdjkhgdkjhdkgjhjk<ArrowLeft onClick={() => this.navigateBackward()} /></FadeIn>}
-      <FadeIn key={'x'}>mmmmmmsdfsfsfsfksjfhskfjhjkh<ArrowRight onClick={() => this.navigateForward()} /></FadeIn>
-      <FadeIn key={'y'}>mmmmmmsdfkhsfkjshfksjfhskfjhjkh<ArrowRight onClick={() => this.navigateForward()} /></FadeIn>
-      <FadeIn key={'z'}>mmmmmmsdfkhsfkjshfksjfhskfjhjkh<ArrowRight onClick={() => this.navigateForward()} /></FadeIn>
-
-      </PoseGroup>
+      {!disableBack ? (
+        <ArrowLeft onClick={() => this.navigateBackward()} />
+      ) : null}
+      <ArrowRight onClick={() => this.navigateForward()} />
     </SideNavPage>
   );
 }
